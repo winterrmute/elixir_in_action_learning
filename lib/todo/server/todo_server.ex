@@ -1,9 +1,13 @@
 defmodule Todo.Server do
-  use GenServer
+  use GenServer, restart: :temporary
 
   # Interface functions
-  def start(name) do
-    GenServer.start(__MODULE__, name)
+  def start_link(name) do
+    GenServer.start_link(__MODULE__, name, name: via_tuple(name))
+  end
+
+  def via_tuple(name) do
+    Todo.Registry.via_tuple({__MODULE__, name})
   end
 
   def add_entry(todo_server, new_entry) do
