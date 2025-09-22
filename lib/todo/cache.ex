@@ -25,7 +25,7 @@ defmodule Todo.Cache do
 
   # Supervisor interface
   defp start_child(todo_list_name) do
-    IO.puts("Starting server for #{todo_list_name}")
+    IO.puts("Storing server for #{todo_list_name} in cache")
 
     DynamicSupervisor.start_child(
       __MODULE__,

@@ -21,10 +21,14 @@ defmodule Todo.List do
     %Todo.List{todo_list | entries: new_entries, next_id: next_id + 1}
   end
 
+  def entries(%__MODULE__{entries: entries}, nil) do
+    entries
+  end
+
   def entries(%__MODULE__{entries: entries}, date) do
     entries
     |> Stream.filter(fn {_, entry} -> entry.date == date end)
-    |> Enum.map(fn {_, entry} -> entry.title end)
+    |> Enum.map(fn {_, entry} -> entry.name end)
   end
 
   def get_entry_by_id(todo_list, entry_id) do
